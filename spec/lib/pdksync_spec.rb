@@ -59,14 +59,12 @@ describe PdkSync do
     end
     it 'gem_file_update runs with invalid gem_line given' do
       expect { PdkSync.main(steps: [:gem_file_update], args: { gem_to_test: 'puppet_litmus', gem_line: "gem 'puppet_litmus'\, git: 'https://github.com/test/puppet_litmus.git'"}) }. to raise_error(Errno::ENOENT)
-      # expect(file).to have_file_content "gem 'puppet_litmus'\, git: 'https://github.com/test/puppet_litmus.git'"
     end
     it 'gem_file_update runs with invalid gem_sha_replacer' do
       expect { PdkSync.main(steps: [:gem_file_update], args: { gem_to_test: 'puppet_litmus', gem_sha_finder: 'jsjsjsjsjsjsjs', gem_sha_replacer: 'abcdefgjhkk'}) }.to raise_error(RuntimeError) #, ("Couldn't find sha: abcdefgjhkk in your repository: puppet_litmus"))
     end
     it 'gem_file_update runs with invalid gem_version_replacer' do
       expect { PdkSync.main(steps: [:gem_file_update], args: { gem_to_test: 'puppet_litmus', gem_version_finder: '<= 0.4.9', gem_version_replacer: '<= 1.4.11'}) }.to raise_error(RuntimeError) #, ("Couldn't find version: 1.4.11 in your repository: puppet_litmus"))
-      # expect(file).to have_file_content "abcdefgjhkk"
     end
     it 'gem_file_update runs with invalid gem_branch_replacer' do
       expect { PdkSync.main(steps: [:gem_file_update], args: { gem_to_test: 'puppet_litmus', gem_branch_finder: 'jsjsjsjsjsjsjs', gem_branch_replacer: 'abcdefgjhkk'}) }.to raise_error(RuntimeError) #, "Couldn't find branch: abcdefgjhkk in your repository: puppet_litmus")
